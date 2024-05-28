@@ -1,0 +1,58 @@
+** La lista enlazada es un rigistro que contiene
+Tipo
+	punt: puntero a lista
+	Registro: lista
+		valor: entero
+		proximo: puntero a lista
+	finRegistro
+prim, p: punt;
+
+** El "puntero" es una variable que contiene la dirección de memoria de otra variable
+para crear un nuevo registro y un puntero usamos "nuevo(p)" (p es la variable de tipo puntero en este caso)
+
+Algoritmo de creación de una lista 
+
+Algoritmo
+    // Inicialización
+    i := 0;
+    Escribir("Ingresar cantidad de elementos de la lista");
+    Leer(cant);
+
+    // Creación del primer nodo
+    nuevo(p);  // Aquí 'nuevo(p)' debe asignar un nuevo registro de tipo 'elto' a 'p'
+    si (p = null) entonces
+        Escribir("Error: No se pudo asignar memoria");
+    sino
+        Escribir("Ingrese dato");
+        Leer(dato);
+        *p.dato := dato;
+        *p.proximo := null;
+        prim := p;
+        ult := p;  // Inicialmente, prim y ult apuntan al mismo nodo
+        i := i + 1;
+
+        // Creación de nodos adicionales
+        mientras (i < cant) hacer
+            nuevo(p);  // Crear un nuevo nodo
+            si (p = null) entonces
+                Escribir("Error: No se pudo asignar memoria");
+                detener;  // Salir del bucle en caso de error
+            sino
+                Escribir("Ingrese dato");
+                Leer(dato);
+                *p.dato := dato;
+                *p.proximo := null;
+                *ult.proximo := p;  // Enlazar el último nodo al nuevo nodo
+                ult := p;  // Actualizar el último nodo
+                i := i + 1;
+            fin si
+        fin mientras
+    fin si
+
+    // Para verificar la lista creada, podríamos recorrerla e imprimir los elementos:
+    p := prim;
+    mientras (p != null) hacer
+        Escribir(p.dato);
+        p := p.proximo;
+    fin mientras
+fin Algoritmo

@@ -1,0 +1,127 @@
+Este algoritmo es la conjunción de todos los ejercicios.
+
+Accion Registro es
+	Ambiente
+		Registro: alumno
+			Legajo: entero;
+			Apellido: cadena;
+			Nombre: cadenda;
+			Nota1: real;
+			Nota2: real;
+			Nota3: real;
+			Condicion: caracter;
+		finRegistro;
+		regular, libre, promocionado:= booleano;
+		alumnos: Arreglo[10] de alumno;
+		alum: alumnos;
+		i, j, cont, cont_mas7, cont_des, aux, cont_regular, cont_promocionados, cont_libres :entero;
+		palabra: cadena;
+		auxreal : real;
+		
+	Algoritmo
+		cont_promocionados:= 0;
+		cont_regular:= 0;
+		cont_libres:= 0;
+
+		** Cargar Datos
+		para(i:= 0; i < 10; i:= i +1);
+			promocionado:= Falso;
+			regular:= Falso;
+			libre:= Falso;
+			cont:= 0;
+			cont_mas:= 0;
+			cont_des:= 0;
+			Escribir("Ingrese el legajo del alumno");
+			leer(aux);
+			alum[i].Legajo:= aux;
+			Escribir("Ingrese el nombre del alumno");
+			leer(palabra);
+			alum[i].Nombre:= palabra;
+			Escribir("Ingrese el apellido del alumno");
+			leer(palabra);
+			alum[i].Apellido:= palabra;
+
+			** Ingresar y Comprobar la primer nota
+			Escribir("Ingrese la nota del primer parcial");
+			leer(auxreal);
+			Si (auxreal >= 6) entonces
+				cont:= cont + 1;
+				Si(auxreal >= 7) entonces
+					cont_mas7:= cont_mas7 + 1;
+				finSi;
+			Sino
+				cont_des:= cont_des + 1;
+			finSi;
+			alum[i].Nota1:= auxreal;
+			
+
+			** Ingresar y Comprobar la segunda nota
+
+			Escribir("Ingrese la nota del segundo parcial");
+			leer(auxreal);
+			Si (auxreal >= 6) entonces
+				cont:= cont + 1;
+				Si(auxreal >= 7) entonces
+					cont_mas7:= cont_mas7 + 1;
+				finSi;
+			Sino
+				cont_des:= cont_des + 1;
+			finSi;
+			alum[i].Nota2:= auxreal;
+
+
+			** Ingresar y Comprobar la tercera nota
+			
+
+			Escribir("Ingrese la nota del primer parcial");
+			leer(auxreal);
+			Si (auxreal >= 6) entonces
+				cont:= cont + 1;
+				Si(auxreal >= 7) entonces
+					cont_mas7:= cont_mas7 + 1;
+				finSi;
+			Sino
+				cont_des:= cont_des + 1;
+			finSi;
+			alum[i].Nota3:= auxreal;
+			
+
+			** Asignarle una condición
+			
+			Si( cont >= 2 ) entonces
+				Si( cont_mas7 = 3) entonces
+					promocionado:= Verdadero;
+				Sino
+					regular:= Verdadero;
+				finSi,
+			Sino
+				libre:= Verdadero;
+			finSi;
+			
+			** Asignarle un caracter de acuerdo a la condición
+			Si(promocionado = Verdadero)
+				alum[i].Condicion:= "p";
+				cont_promocionados:= cont_promocionados + 1;
+			Sino
+				Si( regular = Verdadero	) entonces
+					alum[i].Condicion:= "r";
+					cont_regular:= cont_regular +1;
+				Sino
+					alum[i].Condicion:= "l";
+					cont_libres:= cont_libres +1;
+				finSi;
+			finSi;		
+		finpara;
+		
+		** Mostrar los resultados
+		Escribir("Resultados Programación I");
+		Escribir("nro.Legajo            ", "Apellido            ", "Nombre            ", "Nota1           ", "Nota2            , "Nota3           ", "Condición            ");;
+		para(i:= 0; i < 10, i:= i +1);
+			Escribir(alum[i].Legajo,"            ", alum[i].Apellido,"            ", alum[i].Nombre,"            ",alum[i].Nota1,"            ",alum[i].Nota2, "             ",      					 alum[i].Nota3,"            ",alum[i].Condicion);
+		finpara;
+		
+		Escribir("Cantidad de alumnos promocionados: ", cont_promocionados);
+		Escribir("Cantidad de alumnos regulares: ", cont_regulares);
+		Escribir("Cantidad de alumnos libres: ", cont_libres);
+fAccion	
+		

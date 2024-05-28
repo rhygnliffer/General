@@ -1,0 +1,18 @@
+** Trozo de algoritmo para buscar un número ingresado en una lista
+Escribir("Ingrese un numero");
+Leer(aux);
+encontrado:= Falso;
+lugar_puntero:= 0;
+p:= prim;
+mientras(p<> Null y encontrado:= Falso) hacer
+	Si(*p.valor = aux) entonces
+		encontrado:= Verdadero;
+		lugar:= p;
+	finSi;
+	p:= *p_proximo;
+finMientras;
+Si(encontrado = Verdadero) entonces
+	Escribir("Se encontró el número en la dirección" , lugar_ puntero);
+Sino
+	Escribir("No se encontró el elemento en la lista");
+finSI;

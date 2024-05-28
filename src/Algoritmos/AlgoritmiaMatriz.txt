@@ -1,0 +1,441 @@
+Algoritmo MatrizComplejo es
+	Ambiente
+		A[4,4]entero;
+		B[4,4]:entero;
+		BT[4,4]: entero;
+		C[4,4]entero;
+		Cadena[8]: caracter;
+		i, j, aux, cont, tam_arreglo, i_arreglo, izq, der, centro: entero;
+		Arreglodiag[4]: entero;
+		Arreglodiag2[4]: entero;
+		ArregloD[8]: entero;
+		esta_arreglo: booleano;
+	Algoritmo
+		** Cargar la matriz A y la mitad de B
+		aux:= 0
+		Escribir("Ingresar los valores de la matriz, deben estar entre 1 y 12);
+		para(i := 0; i < 4; i:= i + 1)
+			para(j:= 0; j < 4; j:= j +1) 
+				** Se exige que el valor estre entre 1 y 12
+				repetir
+					Escrbir("Ingrese un valor");
+					Leer(aux)
+					Si (aux < 1 y aux > 12) entonces
+						Escribir("No se puede ingresar ese valor");
+					finSi,
+				Hasta(aux > 0 y aux < 13);
+				A[i,j]:= aux;
+			finpara;
+		finpara;
+
+
+		
+
+
+
+
+		** Cargar Mitad de B(diagonales)
+
+		** Guardar los elementos diagonales en dos arreglos
+		cont:= 0
+		aux:= 0
+		para (i:= 0; i < 4; i:= +1)
+			para(j:= 0; j < 4;j:=j +1)
+				Si(i = j) entonces
+					Arreglodiag[cont] = A[i,j];
+					cont:= cont + 1;
+				Sino 
+					Si(i + j = 3)
+						Arreglodiag2[aux]:= A[i,j];
+					finSi;
+				finSi;
+				
+			finpara;
+		finpara;
+
+		** Cargar las dos primeras filas de la matriz B
+		i:= 0
+		Mientras(i = 0) hacer
+			para(j:= 0; j < 4; j:= j +1)
+				B[i,j]:= Arreglodiag[j];
+			finpara;
+			i:= i + 1;
+			para(j:= 0; j < 4; j:= j + 1)
+				B[i,j]:= Arreglodiag2[j]
+			finpara;
+		finMientras
+				
+		
+		** Cargar las últimas dos
+		cont:= 0
+		aux:= 1
+		para (i:= 2; i < 3; i:= +1)
+			para(j:= 0; j < 4;j:=j +1)
+				B[i,j]:= A[cont, j] + A[aux,j];
+			finpara;
+		finpara;
+		cont:= 2
+		aux:= 1
+		para (i:= 3; i < 4; i:= +1)
+			para(j:= 0; j < 3;j:=j +1)
+				B[i,j]:= A[cont, j] - A[aux,j];
+			finpara;
+		finpara;
+		
+		** Escribir en forma de cuadro
+		Escribir("La matriz A es:");
+		
+		Escribir("| ", A[0,0], "  ",  A[0,1], "  ",  A[0,2], "  ",  A[0,3], "  |");
+		Escribir("| ", A[1,0], "  ",  A[1,1], "  ",  A[1,2], "  ",  A[1,3], "  |");
+		Escribir("| ", A[2,0], "  ",  A[2,1], "  ",  A[2,2], "  ",  A[2,3], "  |");
+		Escribir("| ", A[3,0], "  ",  A[3,1], "  ",  A[3,2], "  ",  A[3,3], "  |");
+		
+		Escribir("La matriz B es:");
+		
+		Escribir("| ", B[0,0], "  ",  B[0,1], "  ",  B[0,2], "  ",  B[0,3], "  |");
+		Escribir("| ", B[1,0], "  ",  B[1,1], "  ",  B[1,2], "  ",  B[1,3], "  |");
+		Escribir("| ", B[2,0], "  ",  B[2,1], "  ",  B[2,2], "  ",  B[2,3], "  |");
+		Escribir("| ", B[3,0], "  ",  B[3,1], "  ",  B[3,2], "  ",  B[3,3], "  |");
+
+		
+		** Transportar B
+		para(i:= 0; i < 4; i:= + 1)
+			para(j:= 0; j < 4; j:= j + 1)
+				BT[j, i]:= B[i,j];
+			finpara;
+		finpara;
+				
+		
+		
+		** Calcular C
+		para(i:= 0; i < 4; i:= + 1)
+			para(j:= 0; j < 4; j:= j + 1)
+				C[i, j]:= A[i,j] - BT[i,j]
+			finpara;
+		finpara;
+		
+		**Mostrar C
+		Escribir("La matriz C es:");
+		
+		Escribir("| ", C[0,0], "  ",  C[0,1], "  ",  C[0,2], "  ",  C[0,3], "  |");
+		Escribir("| ", C[1,0], "  ",  C[1,1], "  ",  C[1,2], "  ",  C[1,3], "  |");
+		Escribir("| ", C[2,0], "  ",  C[2,1], "  ",  C[2,2], "  ",  C[2,3], "  |");
+		Escribir("| ", C[3,0], "  ",  C[3,1], "  ",  C[3,2], "  ",  C[3,3], "  |");
+		
+
+
+		** Calcular Arreglo
+		i_arreglo:= 0;
+		esta_arreglo:= falso;
+		tam_arreglo:= 0;
+		i:= 0;
+		aux:= 0;
+		Mientras (i < 4 y tam_arreglo < 8) hacer
+			j:= 0;
+			Mientras(j < 4 y tam_arreglo < 8) hacer
+				cont:= 0;
+				aux:= A[i,j];
+				esta_arreglo:= falso;
+				Mientras( cont < tam_arreglo y esta_arreglo = falso) hacer
+					Si (ArregloD[cont] = aux)entonces
+						esta_arreglo:= verdadero;
+					finSi;
+					cont:= cont + 1;
+				finMientras
+				Si(esta_arreglo = falso) entonces
+					ArregloD[i_arreglo]:= aux;
+					i_arreglo:= i_arreglo + 1;
+					tam_arreglo:= tam_arreglo + 1;
+				finSi;
+				j:= j + 1;
+			finMientras;
+			i:= i + 1;
+		finMientras;
+		
+
+		** Mostrar Arreglo por pantalla
+
+		para(i:= 0; i < tam_arreglo; i:= i + 1)
+			Escribir(ArregloD[i]);
+		finpara;
+
+
+		** Ordenar con el método bubbleshort
+        	para ( i:= 0; i < tam_arreglo - 1; i:= i + 1) 
+           		 para ( j := 0; j < tam_arreglo - i - 1; j:= j +1) 
+                		Si (arreglo[j] > arreglo[j + 1]) {
+                    			aux = arreglo[j];
+                    			ArregloD[j] = arreglo[j + 1];
+                    			ArregloD[j + 1] = temp;
+                		finSi;
+			finpara;
+		finpara;
+		** Mostrar Arreglo por pantalla
+
+		para(i:= 0; i < tam_arreglo; i:= i + 1)
+			Escribir(ArregloD[i]);
+		finpara;
+		
+
+		** Búsqueda Binaria
+		Escribir("Ingrese un elemento");
+		Leer(aux);
+		esta_arreglo:= falso;
+		izq:= 0;
+		der:= tam - 1;
+		Mientras(izq < der y esta_arreglo = falso) hacer
+			centro:= (izq + der)/ 2;
+			Si (ArregloD[centro] = aux) entonces
+				esta_arreglo = verdadero;
+			Sino
+				Si(ArregloD[centro] < aux) entonces
+					izq:= centro + 1;
+				sino
+					der:= centro - 1;
+				finSi;
+			finSI;
+		finMientras;
+		Si(esta_arreglo = verdadero) entonces
+			Escribir("El elemento está en el arreglo");
+		Sino
+			Escribir("El elemento no está en el arreglo");
+		finSi;
+		
+		
+		** Cargar cadena
+		para(i:= 0; i < tam_arreglo; i:= i + 1)
+			segun Arreglo[i]
+				1: Cadena[i]:= "a";
+				2: Cadena[i]:= "e";
+				3: Cadena[i]:= "i";
+				4: Cadena[i]:= "o";
+				5: Cadena[i]:= "u";
+				otro:
+					Si(Arreglo[i] >= 6 y Arreglo[i] <= 10)
+						Cadena[i]:= "t";
+					Sino
+						Cadena[i]:= "p";
+					finSI;
+			finsegun;
+		finpara;
+		**Mostrar cadena
+		para(i:= 0; i < 8; i:= i + 1)
+			Escribir(Cadena[i]);
+		finpara;
+!!Falta comprobar digtongo
+
+
+en Java(Incompleto: falta parte de cadena y búsqueda binaria)
+
+
+import java.util.Scanner;
+
+public class Matrices {
+    //Ingresar Matriz
+    public static void ingresar_matriz(int[][] matriz) {
+        Scanner sc = new Scanner(System.in);
+        for (int i = 0; i < matriz.length; i++) {
+            for (int j = 0; j < matriz.length; j++) {
+                System.out.print("Ingrese elemento   " + i + " " + j);
+                matriz[i][j] = sc.nextInt();
+            }
+            System.out.println(" ");
+        }
+    }
+
+    // Imprimir Matriz
+    public static void imprimir_matriz(int[][] matriz, String nombre) {
+        System.out.println("La matriz" + nombre +"  es :");
+        for (int i = 0; i < matriz.length; i++) {
+            for (int j = 0; j < matriz.length; j++) {
+                System.out.print(matriz[i][j] + "  ");
+            }
+            System.out.println(" ");
+        }
+    }
+
+    // Matriz transpuesta
+    public static int[][] matriz_transpuesta(int[][] matriz, int filas, int columnas) {
+        int [] [] matriz_t = new int[filas][columnas];
+        for (int i = 0; i < matriz.length; i++) {
+            for (int j = 0; j < matriz.length; j++) {
+                matriz_t[j][i] = matriz[i][j];
+            }
+        }
+        return matriz_t;
+    }
+
+    // Restar Matrices
+    
+    public static int[][] restar_matrices_cuadradas(int[][] matriz, int[][] matriz2 ) {
+        int [] [] resultado_matriz = new int[matriz.length][matriz.length];
+        for (int i = 0; i < matriz.length; i++) {
+            for (int j = 0; j < matriz.length; j++) {
+                resultado_matriz[i][j] = matriz[i][j] - matriz2[i][j];
+            }
+        }
+        return resultado_matriz;
+    }
+
+    
+    // Sacar diagonales
+
+    public static int[] diagonal(int[][] matriz){
+        int[] arreglo = new int[matriz.length];
+        int cont = 0;
+        for (int i = 0; i < matriz.length; i++) {
+            for (int j = 0; j < matriz.length; j++) {
+                if (i == j) {
+                    arreglo[cont] = matriz[i][j];
+                    cont ++;
+                }
+            }
+        }
+        return arreglo;
+
+    }
+
+     public static int[] diagonal_secundaria(int[][] matriz){
+        int[] arreglo = new int[matriz.length];
+        int cont = 0;
+        for (int i = 0; i < matriz.length; i++) {
+            for (int j = 0; j < matriz.length; j++) {
+                if (i + j == matriz.length - 1) {
+                    arreglo[cont] = matriz[i][j];
+                    cont ++;
+                }
+            }
+        }
+        return arreglo;
+
+    }
+
+    // Setters y Getters de filas
+    public static void modificarfila(int[][] matriz, int numero_fila, int[] arreglo){
+        for (int i = numero_fila; i == numero_fila; i++) {
+            for (int j = 0; j < matriz.length; j++) {
+                matriz[i][j]=arreglo[j];
+            }
+        }
+    }
+
+    public static int[] conseguirfila(int[][] matriz, int numero_fila){
+        int[] arreglo = new int[matriz.length];
+        for (int i = numero_fila; i == numero_fila; i++) {
+            for (int j = 0; j < matriz.length; j++) {
+                arreglo[j]= matriz[i][j];
+            }
+        }
+        return arreglo;
+    }
+
+    // Arreglos
+    //Sumar y restar arreglos
+    public static int[] sumar_arreglos_iguales(int[] arreglo1, int[] arreglo2){
+        int[] resultado = new int[arreglo1.length];
+        for (int i = 0; i < resultado.length; i++) {
+            resultado[i] = arreglo1[i] + arreglo2[i];
+        }
+        return resultado;
+    }
+
+    public static int[] restar_arreglos_iguales(int[] arreglo1, int[] arreglo2){
+        int[] resultado = new int[arreglo1.length];
+        for (int i = 0; i < resultado.length; i++) {
+            resultado[i] = arreglo1[i] - arreglo2[i];
+        }
+        return resultado;
+    }
+    // Buscar arreglo
+    public static boolean buscar_elemento_arreglo(int[] arreglo, int valor){
+        int i = 0;
+        boolean esta_arreglo = false;
+        while (i < arreglo.length && esta_arreglo == false) {
+            if (valor == arreglo[i]) {
+                esta_arreglo = true;
+            }
+            i++;
+        }
+        return esta_arreglo;
+    }
+
+    // Escrbir Arreglo
+    public static void imprimir_arreglo(int[] arreglo){
+        for (int i = 0; i < arreglo.length; i++) {
+            System.out.print(arreglo[i] + "  ");
+        }
+        System.out.println(" ");
+    }
+
+    // Comprobar si un arreglo está lleno
+    public static boolean arreglo_lleno(int[] arreglo, int tam){
+        int cont = 0;
+        for (int i = 0; i < arreglo.length; i++) {
+            if (arreglo[i] != 0) {
+                cont++;
+            }
+        }
+        return cont == tam;
+    }
+
+    // Cargar Arreglos con matriz sin repetir elementos
+    public static int[] cargar_arreglo_sin_repetidos(int[][] matriz, int largo){
+        int indice = 0;
+        int temp;
+        int[] arreglo = new int[largo];
+        int i = 0;
+        while (i < matriz.length && arreglo_lleno(arreglo, largo) == false) {
+            int j = 0;
+            while (j < matriz.length && arreglo_lleno(arreglo, largo) == false) {
+                temp = matriz[i][j];
+                if (buscar_elemento_arreglo(arreglo, temp)== false) {
+                    arreglo[indice] = temp;
+                    indice++;
+                }
+                j++;
+            }
+            i++;
+        }
+        return arreglo;
+    }
+
+    // Ordenar elementos con ordenamiento burbuja
+    public static void bubbleshort(int[] arreglo){
+        int n = arreglo.length;
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                if (arreglo[j] > arreglo[j + 1]) {
+                    int temp = arreglo[j];
+                    arreglo[j] = arreglo[j + 1];
+                    arreglo[j + 1] = temp;
+                }
+            }
+        }
+        
+    }
+
+
+    // Método principal
+    public static void main(String[] args) {
+        int aux;
+        int[] [] matrizA = new int [4][4];
+        int[] [] matrizB = new int [4][4];
+        ingresar_matriz(matrizA);
+        imprimir_matriz(matrizA, "A");
+        modificarfila(matrizB, 0, diagonal(matrizA));
+        modificarfila(matrizB, 1, diagonal_secundaria(matrizA));
+        modificarfila(matrizB, 2, sumar_arreglos_iguales(conseguirfila(matrizA, 0),conseguirfila(matrizA, 1)));
+        modificarfila(matrizB, 3, restar_arreglos_iguales(conseguirfila(matrizA, 2),conseguirfila(matrizA, 1)));
+        imprimir_matriz(matrizB, "B");
+        imprimir_matriz(restar_matrices_cuadradas(matrizA, matriz_transpuesta(matrizB, 4, 4)), "C");
+        int[] arregloD = cargar_arreglo_sin_repetidos(matrizA, 8);
+        imprimir_arreglo(arregloD);
+        bubbleshort(arregloD);
+        imprimir_arreglo(arregloD);
+    }
+}
+		
+            
+        
+
+

@@ -1,0 +1,82 @@
+Este algoritmo es la conjunción de todos los ejercicios.
+
+Accion Registro es
+	Ambiente
+		Registro: alumno
+			DNI: entero;
+			Apellido: cadena;
+			Nombre: cadenda;
+			Edad: entero;
+			Promedio: real;
+		finRegistro;
+		listo:= booleano;
+		alumnos: Arreglo[10] de alumno;
+		alum: alumnos;
+		i, cont, aux, mayor_edad, menor_edad, cont_mas7, cont_menos7:entero;
+		palabra: cadena;
+		auxpromedio, sumatoria_edad, sumatoria_menos7,promedio_menos7, porcentaje_mas7 = real;
+		
+	Algoritmo
+		sumatoria_menos7
+		sumatoria_promedio:= 0
+		cont:= 0;
+		mayor_edad:= alum[0].Edad
+		menor_edad:= alum[0].Edad
+		para(i:= 0; i < 10; i:= i +1);
+			Escribir("Ingrese el DNI del alumno");
+			leer(aux);
+			alum[i].DNI:= aux;
+			Escribir("Ingrese el nombre del alumno");
+			leer(palabra);
+			alum[i].Nombre:= palabra;
+			Escribir("Ingrese el apellido del alumno");
+			leer(palabra);
+			alum[i].Apellido:= palabra;
+			Escribir("Ingrese el edad del alumno");
+			leer(aux);
+			alum[i].Edad:= aux;
+			Escribir("Ingrese el promedio del alumno");
+			leer(auxpromedio);
+			alum[i].Promedio:= auxpromedio;
+			cont:= cont + 1; 
+			sumatoria_edad = sumatoria_edad + alum[i].Edad;
+			Si (alum[i].Edad < menor_edad) entonces
+				menor_edad:= alum[i].Edad;
+			finSi;
+			Si (alum[i].Edad > mayor_edad) entonces
+				mayor_edad:= alum[i].Edad;
+			finSi;
+		finpara;
+
+		** Contar y calcular promedios de alumnos
+		para(i:= 0;i < 10; i:= i + 1)
+			Si (alum[i].Promedio >= 7) entonces
+				cont_mas7:= cont_mas7 +1;
+			Sino
+				sumatoria_menos7:= sumatoria_menos7 + alum[i].Promedio;
+				cont_menos7:= cont_menos7 + 1;
+			finSi;
+		finpara;
+			
+		
+		porcentaje_mas7:= (cont_mas7 / 10) * 100;
+		promedio_menos7:= sumatoria_menos7 / cont_menos7;
+
+		** Mostrar los resultados
+		Escribir("Informe:");
+		Escribir("Listado de Alumnos");
+		Escribir("DNI            ", "Apellido            ", "Nombre            ", "Edad            ", "Promedio            ");
+		para(i:= 0; i < 10, i:= i +1);
+			Escribir(alum[i].DNI,"            ", alum[i].Apellido,"            ", alum[i].Nombre,"            ",alum[i].Edad,"            ",alum[i].Promedio);
+		finpara;
+		
+		Escribir("Total de alumnos: ", cont);
+		Escribir("Promedio de edad: ", sumatoria_edad / 10);
+		Escribir("Mayor Edad: ", mayor_edad);
+		Escribir("Menor Edad: ", menor_edad);
+		Escribir("Porcentaje de alumnos con promedio mayor a 7: ", porcentaje_mas7);
+		Escribir("Alumnos con promedio menor a 7: ", cont_mas7);
+		Escribir("Promedio de alumnos con promedio menor a 7:  ", promedio_menos7);
+		
+fAccion	
+		

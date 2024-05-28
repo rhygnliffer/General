@@ -1,0 +1,150 @@
+** Declarar
+A[10]: tipo; *El número es la cantidad de elementos, los índices del arreglo son 0 hasta cantidad-1
+
+
+** Cargar Arreglo
+
+*por elemento:
+A[0]:= 10;
+
+* por estructura repetitiva
+para(i:= 0; i < tam_arreglo; i:= i +1)
+	Escribir("Ingrese un número");
+	Leer(aux);
+	A[i]:= aux;
+finpara;
+
+** Mostrar por pantalla
+para(i:= 0; i < tam_arreglo; i:= i +1)
+	Escribir(A[i]);
+finpara;
+
+** Mostrar posición determinada
+leer(aux);
+Si (aux < 0 o aux >= tam_arreglo) entonces
+	Escribir("Posición no válida);
+Sino 
+	Escribir(A[aux]);
+finSi;
+
+** Buscar elemento en arreglo no ordenado y ordenado
+
+Escribir (“Ingrese elemento a buscar”);
+Leer (b);
+i:=0;
+Mientras (i<10 ∧ enc= 0) hacer
+	Si (b = A[i]) entonces
+		enc:= 1;
+	Sino 
+		i:=i+1;
+	finSi;
+finMientras
+Si (enc = 1) entonces
+	Escribir ("Número encontrado ");
+Sino 
+	Escribir("Número no encontrado ");
+finSi;
+
+
+** Buscar una lista con elementos repetidos y ordenados ejem: 1, 1, 3, 2, 2, 4
+
+Escribir (“Ingrese elemento a buscar”);
+Leer (b);
+i:=0; enc:=0;
+mientras ( i <10)
+	Si(b = lista[i]) entonces
+		mientras (b= lista[i]) hacer
+				enc:=enc+1
+				i:=i+1;
+		fin mientras
+		i:=10;
+	Sino
+		i:= i + 1;
+fin mientras
+si (enc=0) 
+	escribir (“Elemento no encontrado ");
+sino 
+	escribir(“Elemento encontrado: “,enc);
+fin si
+
+**Búsqueda Binaria
+Primero := 0;
+Ultimo := tam - 1;
+Encontrado := falso;
+
+mientras (Primero <= Ultimo) ∧ (Encontrado = falso) hacer
+    Central := (Primero + Ultimo) div 2;  // usar div para división entera
+    si (Clave = A[Central]) entonces
+        Encontrado := verdadero;
+    sino
+        si (Clave > A[Central]) entonces
+            Primero := Central + 1;
+        sino
+            Ultimo := Central - 1;
+        fin si
+    fin si
+fin mientras
+
+si (Encontrado = verdadero) entonces
+    escribir("Elemento encontrado");
+sino
+    escribir("No se ha encontrado");
+fin si
+
+
+** Ordenar arreglo con método de intercambio
+
+tam := longitud(A);
+intercambiado := verdadero;
+
+mientras (intercambiado = verdadero) hacer
+    intercambiado := falso;
+    para i desde 0 hasta tam - 2 hacer
+        si (A[i] > A[i + 1]) entonces
+            temporal := A[i];
+            A[i] := A[i + 1];
+            A[i + 1] := temporal;
+            intercambiado := verdadero;
+        fin si
+    fin para
+    tam := tam - 1;  // Optimización: reduce el rango de comparación
+fin mientras
+
+escribir("Array ordenado: ");
+para i desde 0 hasta longitud(A) - 1 hacer
+    escribir(A[i]);
+fin para
+
+
+** Insertar elemento
+* Se debe comprobar si el arreglo no esta lleno. Luego insertarlo en la posición deseada:
+Consiste en mover los elementos una posición a la derecha desde la posición elegida:
+
+para (i := posicion_deseada; i < tam_actual; i:= i +1) hacer
+        A[i + 1] := A[i];
+fin para
+
+*Y luego insertar el elemento. Si se desea poner en la última posición no se tiene que realizar este procedimiento.
+
+
+** Eliminar elemento
+* Primero se debe comprobar que está en el arreglo. Luego hay que mover los elementos hacia la izquierda,
+Es decir si tenemos [1, 2, 3, 5, 6] si queremos eliminar el elemento 3, movemos desde el 5 todos los elementos
+una posición a la izquierda; eliminando así el elemento 3 ya que quedaría [1, 2, 5, 6, 6]:
+//*Buscar elemento en el arreglo
+i=0;
+mientras (n!=a[i] && i<= max)
+	i++;
+Fin mientras
+si (a[i]== n)
+	/*Eliminar el elemento n del arreglo */
+	para (j=i; j<max;j++)
+	a[j]= a[j+1];
+/*Mostrar el arreglo despues de la eliminación*/
+Para (i = 0; i < max-1; i++)
+Escribir ("Digito",a[i]);
+Fin para
+Sino escribir("Elemento no está en el arreglo\n");
+fin si
+
+ 
